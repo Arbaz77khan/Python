@@ -1,0 +1,59 @@
+
+**** GOAL OF TIME COMPLEXITY ****
+1. While taking time complexity we always have to evaluate programs efficiency when INPUT IS VERY BIG.
+2. We always want a mathematical relationship between time and input i.e how time behaves when different inputs are given. It is typically illustrated using graph.
+3. We always assumes worst case(Upper bound) scenario of code and find their time complexity.
+4. We always look at the largest factor in runtime(i.e which section of program will take the longest to run?)
+
+We have 3 Techniques to measure time complexity as below:
+	1. Measuring TIME to execute
+	2. COUNTING operations involved
+	3. Abstract notion of ORDER OF GROWTH.
+	
+1. Measuring TIME to execute : (Not a efficient one) We calculate the time spent on a block of code. (See python code example)
+	problems: 	1. Time varies if implementation changes.
+				2. Different machines different time.
+				3. Does not work for extreamly small input.
+				4. Times varies for different inputs, but can't establish a relationship.
+
+2. COUNTING operations involved : We count the operation seen in code i.e mathematical operation, comparisons, assignments, accessing objects in memory.
+		Example: def mysum(x):
+					total = 0				-> 1 operation
+					for i in range(x+1):	-> i is assigning x times and futher (x+1) is 1 operation. In loop it will run x times
+						total += i			-> 2 operation(mathematical and assigning)
+					return total
+					
+				number of opeartion : (1 + 3x)	
+				
+	problems:	1. Time varies if implementation changes.
+				2. No clear defination of which operation to count.
+				
+3. Abstract notion of ORDER OF GROWTH : BIG OH NOTATION
+		It measures the upper bound on the asymptotic growth, often called as order of growth.
+		Big Oh or O() is used to describe worst case of program. It occurs often and is the bottleneck when a program runs.
+		
+		We first count number of operations in program and then removing additive constants and multiplicative constants. If there is largest and smallest factor, remove smallest factor i.e if (n^2 + n) -> n^2
+		Example:	def fact_iter(n):
+						answer = 1			->  1
+						while n>1:			-> 1 opereation here in loop
+							answer *= n		-> 2 here in loop
+							n -=1			-> 2 here in loop
+						return answer
+				Number of operations : (1 + 5n)
+				removing additive constants -> 5n
+				removing multiplicative constants -> n
+				So, the big O is O(n)
+				
+		More example: 
+					1. n^2 + 2n + 2			-> here n^2 means loop inside loop, 2n means no of operation inside loop. Ans : O(n^2)
+					2. log(n) + n + 4		-> log(n)
+					3. 0.001*n*log(n) + 300n -> nlog(n)
+					4. 2n^30 + 30^n			-> 30^n
+					
+Types of Big O:
+1. Constant : O(1) : It does not depend on input.
+2. Linear : O(n) :Time is directly proportional to input i.e if input increases, time increases.
+3. Quadratic : O(n^2) Time taken is double of input.  	(e.g nested loops)
+4. Logarithmic : O(log n) : (THIS IS BEST OF ALL Big O) if input increasesby X times, time will increase by 1.	
+5. n log(n) : It is efficient than quadratic but not than linear i.e n > n logn > n2	
+6. Exponential : O(2^n) : (WORST, TRY TO AVOID)	If input increases by 1, time increases by X times. Opposite of log.
